@@ -1,16 +1,18 @@
 package ru.clevertec.check.service;
 
-import lombok.RequiredArgsConstructor;
 import ru.clevertec.check.Dao.ProductDAO;
 import ru.clevertec.check.entity.Product;
 
 import java.util.List;
 import java.util.Optional;
 
-@RequiredArgsConstructor
 public class ProductService implements Service {
 
     private final ProductDAO productDAO;
+
+    public ProductService(ProductDAO productDAO) {
+        this.productDAO = productDAO;
+    }
 
     public Optional<Product> getProductById(long id) {
         return productDAO.getProductById(id);

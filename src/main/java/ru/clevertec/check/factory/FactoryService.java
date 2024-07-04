@@ -1,15 +1,17 @@
 package ru.clevertec.check.factory;
 
 
-import lombok.experimental.UtilityClass;
 import ru.clevertec.check.service.DiscountCardService;
 import ru.clevertec.check.service.ProductService;
 
-@UtilityClass
-public class FactoryService {
+public final class FactoryService {
 
     private static DiscountCardService discountCardService;
     private static ProductService productService;
+
+    private FactoryService() {
+        throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
+    }
 
 
     public static synchronized DiscountCardService getDiscountCardService() {

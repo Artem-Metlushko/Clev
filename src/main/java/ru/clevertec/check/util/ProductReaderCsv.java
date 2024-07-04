@@ -1,19 +1,19 @@
 package ru.clevertec.check.util;
 
-import lombok.RequiredArgsConstructor;
-import lombok.experimental.UtilityClass;
 import ru.clevertec.check.entity.Product;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.Map;
 
-@RequiredArgsConstructor
+
 public class ProductReaderCsv {
 
     private final Map<Long, Product> productMap ;
+
+    public ProductReaderCsv(Map<Long, Product> productMap) {
+        this.productMap = productMap;
+    }
 
     public void loadProducts(String filePath) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {

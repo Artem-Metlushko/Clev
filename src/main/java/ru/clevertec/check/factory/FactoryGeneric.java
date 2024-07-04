@@ -1,22 +1,23 @@
 package ru.clevertec.check.factory;
 
-import lombok.experimental.UtilityClass;
 import ru.clevertec.check.entity.DiscountCard;
 import ru.clevertec.check.entity.Product;
 import ru.clevertec.check.util.DiscountCardReaderCsv;
 import ru.clevertec.check.util.ProductReaderCsv;
-import ru.clevertec.check.util.ReaderAddressManager;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@UtilityClass
-public class FactoryGeneric {
+public final class FactoryGeneric {
+
     private static Map<Long, DiscountCard> discountCardHashMap;
     private static Map<Long, Product> productMap;
     private static DiscountCardReaderCsv discountCardReaderCsv;
     private static ProductReaderCsv productReaderCsv;
 
+    private FactoryGeneric() {
+        throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
+    }
 
     public static synchronized Map<Long, DiscountCard> getDiscountCardHashMap() {
         if (discountCardHashMap == null) {
@@ -25,7 +26,6 @@ public class FactoryGeneric {
         return discountCardHashMap;
 
     }
-
 
     public static synchronized Map<Long, Product> getProductHashMap() {
         if (productMap == null) {
@@ -50,8 +50,5 @@ public class FactoryGeneric {
         return productReaderCsv;
 
     }
-
-
-
 
 }

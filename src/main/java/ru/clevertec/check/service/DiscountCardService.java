@@ -1,17 +1,17 @@
 package ru.clevertec.check.service;
 
-import lombok.RequiredArgsConstructor;
 import ru.clevertec.check.Dao.DiscountCardDAO;
 import ru.clevertec.check.entity.DiscountCard;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-@RequiredArgsConstructor
-public class DiscountCardService implements Service{
+public class DiscountCardService implements Service {
 
     private final DiscountCardDAO discountCardDAO;
+
+    public DiscountCardService(DiscountCardDAO discountCardDAO) {
+        this.discountCardDAO = discountCardDAO;
+    }
 
 
     public DiscountCard getDiscountCard(long id) {

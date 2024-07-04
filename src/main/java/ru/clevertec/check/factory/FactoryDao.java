@@ -1,14 +1,16 @@
 package ru.clevertec.check.factory;
 
-import lombok.experimental.UtilityClass;
 import ru.clevertec.check.Dao.DiscountCardDAO;
 import ru.clevertec.check.Dao.ProductDAO;
 
-@UtilityClass
-public class FactoryDao {
+public final class FactoryDao {
 
     private static DiscountCardDAO discountCardDAO;
     private static ProductDAO productDAO;
+
+    private FactoryDao() {
+        throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
+    }
 
 
     public static synchronized DiscountCardDAO getDiscountCardDAO() {

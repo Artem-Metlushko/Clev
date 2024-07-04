@@ -1,16 +1,18 @@
 package ru.clevertec.check.Dao;
 
-import lombok.RequiredArgsConstructor;
 import ru.clevertec.check.entity.DiscountCard;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@RequiredArgsConstructor
-public class DiscountCardDAO implements Dao{
+public class DiscountCardDAO implements Dao {
 
     private final Map<Long, DiscountCard> discountCardMap;
+
+    public DiscountCardDAO(Map<Long, DiscountCard> discountCardMap) {
+        this.discountCardMap = discountCardMap;
+    }
 
 
     public DiscountCard getDiscountCard(long id) {

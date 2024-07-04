@@ -1,6 +1,5 @@
 package ru.clevertec.check.Dao;
 
-import lombok.RequiredArgsConstructor;
 import ru.clevertec.check.entity.Product;
 
 import java.util.ArrayList;
@@ -9,10 +8,13 @@ import java.util.Map;
 import java.util.Optional;
 
 
-@RequiredArgsConstructor
 public class ProductDAO implements Dao {
 
-    private final Map<Long, Product> productMap ;
+    private final Map<Long, Product> productMap;
+
+    public ProductDAO(Map<Long, Product> productMap) {
+        this.productMap = productMap;
+    }
 
 
     public Optional<Product> getProductById(long id) {

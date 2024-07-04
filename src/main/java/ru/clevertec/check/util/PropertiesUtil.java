@@ -1,31 +1,32 @@
 package ru.clevertec.check.util;
 
-import lombok.experimental.UtilityClass;
-import ru.clevertec.check.exception.PropertiesLoadException;
-
-import java.io.IOException;
-import java.util.Properties;
-
-@UtilityClass
-public final class PropertiesUtil {
+/*public class PropertiesUtil {
     private static Properties PROPERTIES = new Properties();
 
     static {
-        loadProperties();
-    }
-
-    public static String get(String key) {
-        return PROPERTIES.getProperty(key);
-
-    }
-
-    private static void loadProperties() {
-        try (var inputStream = PropertiesUtil.class.getClassLoader().getResourceAsStream("application.properties")) {
-            PROPERTIES.load(inputStream);
-        } catch (IOException e) {
-            throw new PropertiesLoadException("Error loading properties from application.properties", e);
+        try (InputStream input = PropertiesUtil.class.getClassLoader().getResourceAsStream("application.properties")) {
+            if (input == null) {
+                System.out.println("Sorry, unable to find application.properties");
+            }
+            PROPERTIES.load(input);
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 
+    public static String getProperty(String key) {
+        return PROPERTIES.getProperty(key);
+    }
 
-}
+    public static void loadProperties(String fileName) throws IOException {
+        try (InputStream input = PropertiesUtil.class.getClassLoader().getResourceAsStream(fileName)) {
+            if (input == null) {
+                throw new IOException("File not found: " + fileName);
+            }
+            PROPERTIES.load(input);
+        }
+    }
+}*/
+
+
+

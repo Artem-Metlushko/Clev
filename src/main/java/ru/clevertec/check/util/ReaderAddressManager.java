@@ -1,18 +1,23 @@
 package ru.clevertec.check.util;
 
-import lombok.experimental.UtilityClass;
+/*
+public final class ReaderAddressManager {
 
-@UtilityClass
-public class ReaderAddressManager {
+    private static final String DISCOUNT_CARDS_CSV = PropertiesUtil.getProperty("discountCards.csv");
 
-    private static final String DISCOUNT_CARDS_CSV = "discountCards.csv";
-    private static final String PRODUCTS_CSV = "products.csv";
+            ;
+    private static final String PRODUCTS_CSV = PropertiesUtil.getProperty("products.csv");
+
+    private ReaderAddressManager() {
+        throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
+    }
 
     public static String getDiscountCardsAddress() {
-        return PropertiesUtil.get(DISCOUNT_CARDS_CSV);
+        return DISCOUNT_CARDS_CSV;
     }
 
-    public static String getProductsAddress(){
-        return PropertiesUtil.get(PRODUCTS_CSV);
+    public static String getProductsAddress() {
+        return PRODUCTS_CSV;
     }
 }
+*/

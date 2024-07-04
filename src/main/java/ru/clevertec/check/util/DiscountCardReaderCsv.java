@@ -1,8 +1,6 @@
 package ru.clevertec.check.util;
 
-import lombok.RequiredArgsConstructor;
 import ru.clevertec.check.entity.DiscountCard;
-
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -10,10 +8,13 @@ import java.io.IOException;
 import java.util.Map;
 
 
-@RequiredArgsConstructor
 public class DiscountCardReaderCsv {
 
-    private final Map<Long, DiscountCard> discountCardMap ;
+    private final Map<Long, DiscountCard> discountCardMap;
+
+    public DiscountCardReaderCsv(Map<Long, DiscountCard> discountCardMap) {
+        this.discountCardMap = discountCardMap;
+    }
 
     public void loadDiscountCards(String filePath) {
 
@@ -28,7 +29,7 @@ public class DiscountCardReaderCsv {
                 int discountAmount = Integer.parseInt(values[2]);
 
                 DiscountCard discountCard = getDiscountCard(id, number, discountAmount);
-                discountCardMap.put(id,discountCard);
+                discountCardMap.put(id, discountCard);
 
 
             }
