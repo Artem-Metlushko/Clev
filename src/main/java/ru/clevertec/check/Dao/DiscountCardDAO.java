@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 @RequiredArgsConstructor
-public class DiscountCardDAO {
+public class DiscountCardDAO implements Dao{
 
     private final Map<Long, DiscountCard> discountCardMap;
 

@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 @RequiredArgsConstructor
-public class DiscountCardService {
+public class DiscountCardService implements Service{
 
     private final DiscountCardDAO discountCardDAO;
 

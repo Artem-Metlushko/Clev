@@ -2,7 +2,6 @@ package ru.clevertec.check.util;
 
 import lombok.RequiredArgsConstructor;
 import ru.clevertec.check.entity.DiscountCard;
-import ru.clevertec.check.entity.Product;
 
 
 import java.io.BufferedReader;
