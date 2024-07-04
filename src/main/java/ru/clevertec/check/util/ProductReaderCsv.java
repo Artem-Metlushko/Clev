@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 import java.util.Map;
 
 @RequiredArgsConstructor
-public class ReaderCsv {
+public class ProductReaderCsv {
 
     private final Map<Long, Product> productMap ;
 
@@ -26,18 +26,22 @@ public class ReaderCsv {
                 double price = Double.parseDouble(values[2].replace(",", ".").trim());
                 int quantity = Integer.parseInt(values[3]);
                 boolean wholesale = values[4].trim().equals("+");
-                Product product = Product.builder()
-                        .id(id)
-                        .description(description)
-                        .price(price)
-                        .quantity(quantity)
-                        .wholesale(wholesale)
-                        .build();
+                Product product = getProduct(id, description, price, quantity, wholesale);
                 productMap.put(id, product);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private Product getProduct(long id, String description, double price, int quantity, boolean wholesale) {
+        return Product.builder()
+                .id(id)
+                .description(description)
+                .price(price)
+                .quantity(quantity)
+                .wholesale(wholesale)
+                .build();
     }
 
 

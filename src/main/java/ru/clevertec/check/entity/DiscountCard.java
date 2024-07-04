@@ -6,7 +6,9 @@ import lombok.Data;
 @Builder
 @Data
 public class DiscountCard {
+
     private Long id;
-    private int number;
+    private String number;
     private Integer discountAmount;
+
 }
