@@ -1,11 +1,9 @@
 package ru.clevertec.check;
 
 import ru.clevertec.check.Dao.DiscountCardDAO;
-import ru.clevertec.check.Dao.ProductDAO;
 import ru.clevertec.check.entity.DiscountCard;
-import ru.clevertec.check.entity.Product;
-import ru.clevertec.check.factory.dao.FactoryDaoProduct;
-import ru.clevertec.check.factory.generic.GenericFactory;
+import ru.clevertec.check.factory.FactoryGeneric;
+import ru.clevertec.check.factory.FactoryService;
 import ru.clevertec.check.service.DiscountCardService;
 import ru.clevertec.check.service.ProductService;
 import ru.clevertec.check.util.DiscountCardReaderCsv;
@@ -16,26 +14,19 @@ import java.util.Map;
 
 public class CheckRunner {
     public static void main(String[] args) {
-        Map<Long, Product> productMap = GenericFactory.getProductMap();
 
-        FactoryDaoProduct factoryDaoProduct = new FactoryDaoProduct(productMap);
-        ProductDAO productDao = (ProductDAO) factoryDaoProduct.createDao();
-        ProductService productService = new ProductService(productDao);
-
+        ProductReaderCsv productReaderCsv = FactoryGeneric.getProductReaderCsv();
         String productsAddress = ReaderAddressManager.getProductsAddress();
-        ProductReaderCsv readerCsv = new ProductReaderCsv(productMap);
-        readerCsv.loadProducts(productsAddress);
+        productReaderCsv.loadProducts(productsAddress);
 
+        ProductService productService = FactoryService.getProductService();
         productService.getAllProducts().forEach(System.out::println);
 
 
-        Map<Long, DiscountCard> discountCardMap = GenericFactory.getDiscountCardMap();
-        String discountSvFilePath = ReaderAddressManager.getDiscountCardsAddress();
-        DiscountCardReaderCsv discountCardReaderCsv = new DiscountCardReaderCsv(discountCardMap);
-        discountCardReaderCsv.loadDiscountCards(discountSvFilePath);
-
-        DiscountCardDAO discountCardDAO = new DiscountCardDAO(discountCardMap);
-        DiscountCardService discountCardService = new DiscountCardService(discountCardDAO);
+        DiscountCardReaderCsv discountCardReaderCsv = FactoryGeneric.getDiscountCardReaderCsv();
+        String discountCardsAddress = ReaderAddressManager.getDiscountCardsAddress();
+        discountCardReaderCsv.loadDiscountCards(discountCardsAddress);
+        DiscountCardService discountCardService = FactoryService.getDiscountCardService();
 
         discountCardService.getAllDiscountCards().forEach(System.out::println);
     }
