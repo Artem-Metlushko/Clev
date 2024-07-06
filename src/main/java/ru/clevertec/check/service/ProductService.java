@@ -1,6 +1,6 @@
 package ru.clevertec.check.service;
 
-import ru.clevertec.check.Dao.ProductDAO;
+import ru.clevertec.check.dao.ProductDAO;
 import ru.clevertec.check.entity.Product;
 
 import java.util.List;

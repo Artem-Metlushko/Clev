@@ -25,7 +25,7 @@ public class DiscountCardReaderCsv {
                 String[] values = line.split(";");
 
                 long id = Long.parseLong(values[0]);
-                String number = values[1];
+                long number = Long.parseLong(values[1]);
                 int discountAmount = Integer.parseInt(values[2]);
 
                 DiscountCard discountCard = getDiscountCard(id, number, discountAmount);
@@ -38,7 +38,7 @@ public class DiscountCardReaderCsv {
         }
     }
 
-    private DiscountCard getDiscountCard(long id, String number, int discountAmount) {
+    private DiscountCard getDiscountCard(long id, Long number, int discountAmount) {
         return DiscountCard.builder()
                 .id(id)
                 .number(number)

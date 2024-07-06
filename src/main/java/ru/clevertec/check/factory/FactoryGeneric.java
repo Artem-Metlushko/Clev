@@ -4,6 +4,7 @@ import ru.clevertec.check.entity.DiscountCard;
 import ru.clevertec.check.entity.Product;
 import ru.clevertec.check.util.DiscountCardReaderCsv;
 import ru.clevertec.check.util.ProductReaderCsv;
+import ru.clevertec.check.validator.Validator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +15,7 @@ public final class FactoryGeneric {
     private static Map<Long, Product> productMap;
     private static DiscountCardReaderCsv discountCardReaderCsv;
     private static ProductReaderCsv productReaderCsv;
+    private static Validator validator;
 
     private FactoryGeneric() {
         throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
@@ -48,6 +50,14 @@ public final class FactoryGeneric {
             productReaderCsv = new ProductReaderCsv(getProductHashMap());
         }
         return productReaderCsv;
+
+    }
+
+    public static synchronized Validator getValidator() {
+        if (validator == null) {
+            validator = new Validator();
+        }
+        return validator;
 
     }
 

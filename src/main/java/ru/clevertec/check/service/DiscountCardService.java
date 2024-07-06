@@ -1,6 +1,6 @@
 package ru.clevertec.check.service;
 
-import ru.clevertec.check.Dao.DiscountCardDAO;
+import ru.clevertec.check.dao.DiscountCardDAO;
 import ru.clevertec.check.entity.DiscountCard;
 
 import java.util.List;
@@ -33,4 +33,6 @@ public class DiscountCardService implements Service {
     public List<DiscountCard> getAllDiscountCards() {
         return discountCardDAO.getAllDiscountCards();
     }
+
+
 }

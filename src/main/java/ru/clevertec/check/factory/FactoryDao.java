@@ -1,7 +1,7 @@
 package ru.clevertec.check.factory;
 
-import ru.clevertec.check.Dao.DiscountCardDAO;
-import ru.clevertec.check.Dao.ProductDAO;
+import ru.clevertec.check.dao.DiscountCardDAO;
+import ru.clevertec.check.dao.ProductDAO;
 
 public final class FactoryDao {
 

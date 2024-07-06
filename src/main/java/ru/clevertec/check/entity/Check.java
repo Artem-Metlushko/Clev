@@ -1,52 +1,66 @@
 package ru.clevertec.check.entity;
 
-public class Check {
-    private Long id;
-    private Integer quantity;
-    private Integer discountCard;
-    private Integer balanceDebitCard;
+import java.util.Map;
 
-    Check(Long id, Integer quantity, Integer discountCard, Integer balanceDebitCard) {
+public class Check {
+
+    private Long id;
+    private Long discountCardNumber;
+    private double totalCost;
+    private Double balanceDebitCard;
+    private Map<Long, Integer> productQuantities;
+
+    Check(Long id, Long discountCardNumber, double totalCost, Double balanceDebitCard, Map<Long, Integer> productQuantities) {
         this.id = id;
-        this.quantity = quantity;
-        this.discountCard = discountCard;
+        this.discountCardNumber = discountCardNumber;
+        this.totalCost = totalCost;
         this.balanceDebitCard = balanceDebitCard;
+        this.productQuantities = productQuantities;
     }
 
     public static CheckBuilder builder() {
         return new CheckBuilder();
     }
 
+
     public Long getId() {
         return this.id;
     }
 
-    public Integer getQuantity() {
-        return this.quantity;
+    public Long getDiscountCardNumber() {
+        return this.discountCardNumber;
     }
 
-    public Integer getDiscountCard() {
-        return this.discountCard;
+    public double getTotalCost() {
+        return this.totalCost;
     }
 
-    public Integer getBalanceDebitCard() {
+    public Double getBalanceDebitCard() {
         return this.balanceDebitCard;
+    }
+
+    public Map<Long, Integer> getProductQuantities() {
+        return this.productQuantities;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
+    public void setDiscountCardNumber(Long discountCardNumber) {
+        this.discountCardNumber = discountCardNumber;
     }
 
-    public void setDiscountCard(Integer discountCard) {
-        this.discountCard = discountCard;
+    public void setTotalCost(double totalCost) {
+        this.totalCost = totalCost;
     }
 
-    public void setBalanceDebitCard(Integer balanceDebitCard) {
+    public void setBalanceDebitCard(Double balanceDebitCard) {
         this.balanceDebitCard = balanceDebitCard;
+    }
+
+    public void setProductQuantities(Map<Long, Integer> productQuantities) {
+        this.productQuantities = productQuantities;
     }
 
     public boolean equals(final Object o) {
@@ -57,16 +71,18 @@ public class Check {
         final Object this$id = this.getId();
         final Object other$id = other.getId();
         if (this$id == null ? other$id != null : !this$id.equals(other$id)) return false;
-        final Object this$quantity = this.getQuantity();
-        final Object other$quantity = other.getQuantity();
-        if (this$quantity == null ? other$quantity != null : !this$quantity.equals(other$quantity)) return false;
-        final Object this$discountCard = this.getDiscountCard();
-        final Object other$discountCard = other.getDiscountCard();
-        if (this$discountCard == null ? other$discountCard != null : !this$discountCard.equals(other$discountCard))
+        final Object this$discountCardNumber = this.getDiscountCardNumber();
+        final Object other$discountCardNumber = other.getDiscountCardNumber();
+        if (this$discountCardNumber == null ? other$discountCardNumber != null : !this$discountCardNumber.equals(other$discountCardNumber))
             return false;
+        if (Double.compare(this.getTotalCost(), other.getTotalCost()) != 0) return false;
         final Object this$balanceDebitCard = this.getBalanceDebitCard();
         final Object other$balanceDebitCard = other.getBalanceDebitCard();
         if (this$balanceDebitCard == null ? other$balanceDebitCard != null : !this$balanceDebitCard.equals(other$balanceDebitCard))
+            return false;
+        final Object this$productQuantities = this.getProductQuantities();
+        final Object other$productQuantities = other.getProductQuantities();
+        if (this$productQuantities == null ? other$productQuantities != null : !this$productQuantities.equals(other$productQuantities))
             return false;
         return true;
     }
@@ -80,24 +96,27 @@ public class Check {
         int result = 1;
         final Object $id = this.getId();
         result = result * PRIME + ($id == null ? 43 : $id.hashCode());
-        final Object $quantity = this.getQuantity();
-        result = result * PRIME + ($quantity == null ? 43 : $quantity.hashCode());
-        final Object $discountCard = this.getDiscountCard();
-        result = result * PRIME + ($discountCard == null ? 43 : $discountCard.hashCode());
+        final Object $discountCardNumber = this.getDiscountCardNumber();
+        result = result * PRIME + ($discountCardNumber == null ? 43 : $discountCardNumber.hashCode());
+        final long $totalCost = Double.doubleToLongBits(this.getTotalCost());
+        result = result * PRIME + (int) ($totalCost >>> 32 ^ $totalCost);
         final Object $balanceDebitCard = this.getBalanceDebitCard();
         result = result * PRIME + ($balanceDebitCard == null ? 43 : $balanceDebitCard.hashCode());
+        final Object $productQuantities = this.getProductQuantities();
+        result = result * PRIME + ($productQuantities == null ? 43 : $productQuantities.hashCode());
         return result;
     }
 
     public String toString() {
-        return "Check(id=" + this.getId() + ", quantity=" + this.getQuantity() + ", discountCard=" + this.getDiscountCard() + ", balanceDebitCard=" + this.getBalanceDebitCard() + ")";
+        return "Check(id=" + this.getId() + ", discountCardNumber=" + this.getDiscountCardNumber() + ", totalCost=" + this.getTotalCost() + ", balanceDebitCard=" + this.getBalanceDebitCard() + ", productQuantities=" + this.getProductQuantities() + ")";
     }
 
     public static class CheckBuilder {
         private Long id;
-        private Integer quantity;
-        private Integer discountCard;
-        private Integer balanceDebitCard;
+        private Long discountCardNumber;
+        private double totalCost;
+        private Double balanceDebitCard;
+        private Map<Long, Integer> productQuantities;
 
         CheckBuilder() {
         }
@@ -107,27 +126,32 @@ public class Check {
             return this;
         }
 
-        public CheckBuilder quantity(Integer quantity) {
-            this.quantity = quantity;
+        public CheckBuilder discountCardNumber(Long discountCardNumber) {
+            this.discountCardNumber = discountCardNumber;
             return this;
         }
 
-        public CheckBuilder discountCard(Integer discountCard) {
-            this.discountCard = discountCard;
+        public CheckBuilder totalCost(double totalCost) {
+            this.totalCost = totalCost;
             return this;
         }
 
-        public CheckBuilder balanceDebitCard(Integer balanceDebitCard) {
+        public CheckBuilder balanceDebitCard(Double balanceDebitCard) {
             this.balanceDebitCard = balanceDebitCard;
             return this;
         }
 
+        public CheckBuilder productQuantities(Map<Long, Integer> productQuantities) {
+            this.productQuantities = productQuantities;
+            return this;
+        }
+
         public Check build() {
-            return new Check(this.id, this.quantity, this.discountCard, this.balanceDebitCard);
+            return new Check(this.id, this.discountCardNumber, this.totalCost, this.balanceDebitCard, this.productQuantities);
         }
 
         public String toString() {
-            return "Check.CheckBuilder(id=" + this.id + ", quantity=" + this.quantity + ", discountCard=" + this.discountCard + ", balanceDebitCard=" + this.balanceDebitCard + ")";
+            return "Check.CheckBuilder(id=" + this.id + ", discountCardNumber=" + this.discountCardNumber + ", totalCost=" + this.totalCost + ", balanceDebitCard=" + this.balanceDebitCard + ", productQuantities=" + this.productQuantities + ")";
         }
     }
 }
