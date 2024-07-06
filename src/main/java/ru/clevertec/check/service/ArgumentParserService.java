@@ -18,6 +18,12 @@ public class ArgumentParserService {
             } else if (arg.startsWith("balanceDebitCard=")) {
                 double balance = Double.parseDouble(arg.split("=")[1]);
                 argumentParser.setBalanceDebitCard(balance);
+            } else if (arg.startsWith("pathToFile=")) {
+                String pathToFile = arg.split("=")[1];
+                argumentParser.setPathToFile(pathToFile);
+            } else if (arg.startsWith("saveToFile=")) {
+                String saveToFile = arg.split("=")[1];
+                argumentParser.setSaveToFile(saveToFile);
             } else {
                 String[] parts = arg.split("-");
                 Long productId = Long.parseLong(parts[0]);

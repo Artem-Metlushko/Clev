@@ -18,25 +18,27 @@ public class CheckRunnerR {
         loadProductFromCsv();
         loadDiscountCardFromCsv();
 
-
         ArgumentParserService argumentParserService = FactoryService.getArgumentParserService();
-        ArgumentParserDto argumentParser = argumentParserService.parseArguments(args);
+        ArgumentParserDto argumentParserDto = argumentParserService.parseArguments(args);
 
         CheckService checkService = FactoryService.getCheckService();
-        Check checkFromCommandLine = checkService.getCheckFromCommandLine(argumentParser);
+        Check checkFromCommandLine = checkService.getCheckFromCommandLine(argumentParserDto);
 
         Validator validator = FactoryGeneric.getValidator();
         validator.validateBalance(checkFromCommandLine);
 
         checkService.printReceipt(checkFromCommandLine);
-        createResultCsv(checkService, checkFromCommandLine);
+
+        String saveToFile = argumentParserDto.getSaveToFile();
+        checkService.writeReceiptToCsv(checkFromCommandLine,saveToFile);
 
     }
 
-    private static void createResultCsv(CheckService checkService, Check checkFromCommandLine) {
-        String filePath = "result.csv";
-        checkService.writeReceiptToCsv(checkFromCommandLine,filePath);
-    }
+//    private static void createResultCsv(CheckService checkService, Check checkFromCommandLine,ArgumentParserDto argumentParserDto) {
+//        String saveToFile = argumentParserDto.getSaveToFile();
+////        String filePath = "result.csv";
+//        checkService.writeReceiptToCsv(checkFromCommandLine,saveToFile);
+//    }
 
 
     private static void loadDiscountCardFromCsv() {

@@ -21,7 +21,7 @@ public class CheckService {
     public Check getCheckFromCommandLine(ArgumentParserDto argumentParserDto) {
 
         Check checkAfterParseCommandLine = getCheckAfterParseCommandLine(argumentParserDto);
-        return getSumTotalCost(checkAfterParseCommandLine);
+        return getCheck(checkAfterParseCommandLine);
 
     }
 
@@ -37,7 +37,7 @@ public class CheckService {
         System.out.println("Total cost: " + totalCost);
     }
 
-    public void writeReceiptToCsv(Check check,String filePath) {
+    public void writeReceiptToCsv(Check check, String filePath) {
         Map<Long, Integer> productQuantities = check.getProductQuantities();
         double totalCost = check.getTotalCost();
         try (FileWriter writer = new FileWriter(filePath)) {
@@ -61,7 +61,6 @@ public class CheckService {
     }
 
 
-
     private Check getCheckAfterParseCommandLine(ArgumentParserDto argumentParserDto) {
         Check check = Check.builder().build();
 
@@ -78,40 +77,71 @@ public class CheckService {
         return check;
     }
 
-    private Check getSumTotalCost(Check check) {
-        Map<Long, Integer> productQuantities = check.getProductQuantities();
-        double totalCost = 0.0;
-        for (Map.Entry<Long, Integer> entry : productQuantities.entrySet()) {
-            Product product = productService.getProductById(entry.getKey()).orElseThrow();
-            totalCost += product.getPrice() * entry.getValue();
+    /*    private Check getSumTotalCost(Check check) {
+            Map<Long, Integer> productQuantities = check.getProductQuantities();
+            double totalCost = 0.0;
+            for (Map.Entry<Long, Integer> entry : productQuantities.entrySet()) {
+                Product product = productService.getProductById(entry.getKey()).orElseThrow();
+                totalCost += product.getPrice() * entry.getValue();
+            }
+            check.setTotalCost(totalCost);
+    //        return totalCost;
+            return getTotalCostAfterApplyDiscount(check);
         }
-        check.setTotalCost(totalCost);
-//        return totalCost;
-        return getTotalCostAfterApplyDiscount(check);
-    }
 
 
-    private Check getTotalCostAfterApplyDiscount(Check check) {
-        double totalCost = check.getTotalCost();
+        private Check getTotalCostAfterApplyDiscount(Check check) {
+            double totalCost = check.getTotalCost();
+            Long discountCardNumber = check.getDiscountCardNumber();
+
+            if (discountCardNumber != null) {
+                DiscountCard discountCard = discountCardService.getDiscountCard(discountCardNumber);
+                if (discountCard != null) {
+                    double discount = totalCost * discountCard.getDiscountAmount() / 100.0;
+                    System.out.println("Discount applied: " + discount);
+                    double v = totalCost - discount;
+                    check.setTotalCost(v);
+                    return check;
+
+                } else {
+                    System.out.println("Warning: Discount card not found.");
+                }
+            }
+    //        return totalCost;
+            return check;
+
+        }
+
+    */
+    public Check getCheck(Check check) {
+        double totalCost = 0.0;
+        Map<Long, Integer> productQuantities = check.getProductQuantities();
         Long discountCardNumber = check.getDiscountCardNumber();
 
-        if (discountCardNumber != null) {
-            DiscountCard discountCard = discountCardService.getDiscountCard(discountCardNumber);
-            if (discountCard != null) {
-                double discount = totalCost * discountCard.getDiscountAmount() / 100.0;
-                System.out.println("Discount applied: " + discount);
-                double v = totalCost - discount;
-                check.setTotalCost(v);
-                return check;
+        for (Map.Entry<Long, Integer> entry : productQuantities.entrySet()) {
+            Product product = productService.getProductById(entry.getKey()).orElseThrow();
+            double itemCost = product.getPrice() * entry.getValue();
 
-            } else {
-                System.out.println("Warning: Discount card not found.");
+            if (product.isWholesale() && entry.getValue() > 5) {
+                itemCost *= 0.90;
+                System.out.println("Wholesale discount applied to product ID: " + product.getId());
+            } else if (discountCardNumber != null) {
+                DiscountCard discountCard = discountCardService.getDiscountCard(discountCardNumber);
+                if (discountCard != null) {
+                    double discount = itemCost * discountCard.getDiscountAmount() / 100.0;
+                    itemCost -= discount;
+                    System.out.println("Discount card applied: " + discount + " on product ID: " + product.getId());
+                } else {
+                    System.out.println("Warning: Discount card not found.");
+                }
             }
+
+            totalCost += itemCost;
+            check.setTotalCost(totalCost);
+
         }
-//        return totalCost;
         return check;
     }
-
 
 
 }
