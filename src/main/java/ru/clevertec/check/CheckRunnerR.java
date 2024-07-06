@@ -15,11 +15,12 @@ public class CheckRunnerR {
 
     public static void main(String[] args) {
 
-        loadProductFromCsv();
         loadDiscountCardFromCsv();
 
         ArgumentParserService argumentParserService = FactoryService.getArgumentParserService();
         ArgumentParserDto argumentParserDto = argumentParserService.parseArguments(args);
+
+        loadProductFromCsv(argumentParserDto);
 
         CheckService checkService = FactoryService.getCheckService();
         Check checkFromCommandLine = checkService.getCheckFromCommandLine(argumentParserDto);
@@ -34,11 +35,12 @@ public class CheckRunnerR {
 
     }
 
-//    private static void createResultCsv(CheckService checkService, Check checkFromCommandLine,ArgumentParserDto argumentParserDto) {
-//        String saveToFile = argumentParserDto.getSaveToFile();
-////        String filePath = "result.csv";
-//        checkService.writeReceiptToCsv(checkFromCommandLine,saveToFile);
-//    }
+    private static void loadProductFromCsv(ArgumentParserDto argumentParserDto) {
+        ProductReaderCsv productReaderCsv = FactoryGeneric.getProductReaderCsv();
+        String pathToFile = argumentParserDto.getPathToFile();
+        productReaderCsv.loadProducts(pathToFile);
+    }
+
 
 
     private static void loadDiscountCardFromCsv() {
@@ -47,11 +49,6 @@ public class CheckRunnerR {
         discountCardReaderCsv.loadDiscountCards(discountCardsAddress);
     }
 
-    private static void loadProductFromCsv() {
-        ProductReaderCsv productReaderCsv = FactoryGeneric.getProductReaderCsv();
-        String productsAddress = "src/main/resources/products.csv";
-        productReaderCsv.loadProducts(productsAddress);
-    }
 
 
 }
