@@ -9,8 +9,6 @@ import ru.clevertec.check.service.CheckService;
 import ru.clevertec.check.util.DiscountCardReaderCsv;
 import ru.clevertec.check.util.ProductReaderCsv;
 
-import java.util.Map;
-
 
 
 
@@ -29,14 +27,16 @@ public class CheckRunnerR {
         ArgumentParserService argumentParserService = FactoryService.getArgumentParserService();
         ArgumentParserDto argumentParser = argumentParserService.parseArguments(args);
 
-        Check checkFromCommandLine = getCheckFromCommandLine(argumentParser);
-        Check check = getCheckAfterApplyDiscount(checkFromCommandLine);
+        CheckService checkService = FactoryService.getCheckService();
+
+        Check checkFromCommandLine = checkService.getCheckFromCommandLine(argumentParser);
+
 
 
 //        Validator validator = FactoryGeneric.getValidator();
 //        validator.validateBalance(balanceDebitCard, totalCost);
-        CheckService checkService = FactoryService.getCheckService();
-        checkService.printReceipt(check);
+
+        checkService.printReceipt(checkFromCommandLine);
 
     }
 
@@ -52,25 +52,6 @@ public class CheckRunnerR {
         String productsAddress = "src/main/resources/products.csv";
         productReaderCsv.loadProducts(productsAddress);
     }
-    private static Check getCheckFromCommandLine(ArgumentParserDto argumentParser){
-        Check check = Check.builder().build();
 
-        Long discountCardNumber = argumentParser.getDiscountCardNumber();
-        check.setDiscountCardNumber(discountCardNumber);
-
-        Double balanceDebitCard = argumentParser.getBalanceDebitCard();
-        check.setBalanceDebitCard(balanceDebitCard);
-
-        Map<Long, Integer> productQuantities = argumentParser.getProductQuantities();
-        check.setProductQuantities(productQuantities);
-        return check;
-    }
-
-    private static Check getCheckAfterApplyDiscount(Check checkFromCommandLine) {
-        CheckService checkService = FactoryService.getCheckService();
-        double sumTotalCost = checkService.getSumTotalCost(checkFromCommandLine);
-        checkFromCommandLine.setTotalCost(sumTotalCost);
-        return checkFromCommandLine;
-    }
 
 }
