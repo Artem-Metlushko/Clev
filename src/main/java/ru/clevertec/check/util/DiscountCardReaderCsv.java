@@ -31,7 +31,6 @@ public class DiscountCardReaderCsv {
                 DiscountCard discountCard = getDiscountCard(id, number, discountAmount);
                 discountCardMap.put(id, discountCard);
 
-
             }
         } catch (IOException e) {
             e.printStackTrace();

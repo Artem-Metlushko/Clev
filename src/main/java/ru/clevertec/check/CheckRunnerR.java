@@ -8,17 +8,12 @@ import ru.clevertec.check.service.ArgumentParserService;
 import ru.clevertec.check.service.CheckService;
 import ru.clevertec.check.util.DiscountCardReaderCsv;
 import ru.clevertec.check.util.ProductReaderCsv;
-
-
+import ru.clevertec.check.validator.Validator;
 
 
 public class CheckRunnerR {
 
     public static void main(String[] args) {
-        if (args.length < 1) {
-            System.out.println("Usage: java -cp src ./src/main/java/ru/clevertec/check/CheckRunner.java id-quantity discountCard=xxxx balanceDebitCard=xxxx");
-            return;
-        }
 
         loadProductFromCsv();
         loadDiscountCardFromCsv();
@@ -28,16 +23,19 @@ public class CheckRunnerR {
         ArgumentParserDto argumentParser = argumentParserService.parseArguments(args);
 
         CheckService checkService = FactoryService.getCheckService();
-
         Check checkFromCommandLine = checkService.getCheckFromCommandLine(argumentParser);
 
-
-
-//        Validator validator = FactoryGeneric.getValidator();
-//        validator.validateBalance(balanceDebitCard, totalCost);
+        Validator validator = FactoryGeneric.getValidator();
+        validator.validateBalance(checkFromCommandLine);
 
         checkService.printReceipt(checkFromCommandLine);
+        createResultCsv(checkService, checkFromCommandLine);
 
+    }
+
+    private static void createResultCsv(CheckService checkService, Check checkFromCommandLine) {
+        String filePath = "result.csv";
+        checkService.writeReceiptToCsv(checkFromCommandLine,filePath);
     }
 
 

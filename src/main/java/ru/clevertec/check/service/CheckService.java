@@ -5,6 +5,8 @@ import ru.clevertec.check.entity.Check;
 import ru.clevertec.check.entity.DiscountCard;
 import ru.clevertec.check.entity.Product;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Map;
 
 public class CheckService {
@@ -34,6 +36,31 @@ public class CheckService {
         }
         System.out.println("Total cost: " + totalCost);
     }
+
+    public void writeReceiptToCsv(Check check,String filePath) {
+        Map<Long, Integer> productQuantities = check.getProductQuantities();
+        double totalCost = check.getTotalCost();
+        try (FileWriter writer = new FileWriter(filePath)) {
+            writer.append("Product,Quantity,Price,Total\n");
+            for (Map.Entry<Long, Integer> entry : productQuantities.entrySet()) {
+                Product product = productService.getProductById(entry.getKey()).orElseThrow();
+                double productTotal = product.getPrice() * entry.getValue();
+                writer.append(product.getDescription())
+                        .append(',')
+                        .append(String.valueOf(entry.getValue()))
+                        .append(',')
+                        .append(String.valueOf(product.getPrice()))
+                        .append(',')
+                        .append(String.valueOf(productTotal))
+                        .append('\n');
+            }
+            writer.append("Total Cost,,," + totalCost + '\n');
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     private Check getCheckAfterParseCommandLine(ArgumentParserDto argumentParserDto) {
         Check check = Check.builder().build();
