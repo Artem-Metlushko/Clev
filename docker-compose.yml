@@ -1,0 +1,11 @@
+services:
+  postgres:
+    image: "postgres"
+    container_name: "products"
+    restart: always
+    environment:
+      POSTGRES_DB: "products"
+      POSTGRES_USER: "postuser"
+      POSTGRES_PASSWORD: "qwerty"
+    ports:
+      - "5432:5432"

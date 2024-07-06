@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class ArgumentParserService {
 
-    public ArgumentParserDto parseArguments(String[] args) {
+    public static ArgumentParserDto parseArguments(String[] args) {
         ArgumentParserDto argumentParser = ArgumentParserDto.builder()
                 .build();
         Map<Long, Integer> productQuantities = new HashMap<>();
@@ -18,10 +18,16 @@ public class ArgumentParserService {
             } else if (arg.startsWith("balanceDebitCard=")) {
                 double balance = Double.parseDouble(arg.split("=")[1]);
                 argumentParser.setBalanceDebitCard(balance);
-            } else if (arg.startsWith("pathToFile=")) {
-                String pathToFile = arg.split("=")[1];
-                argumentParser.setPathToFile(pathToFile);
-            } else if (arg.startsWith("saveToFile=")) {
+            }  else if (arg.startsWith("datasource.url=")) {
+                String dataSourceUrl = arg.split("=")[1];
+                argumentParser.setDataSourceUrl(dataSourceUrl);
+            }else if (arg.startsWith("datasource.username=")) {
+                String dataSourceUserName = arg.split("=")[1];
+                argumentParser.setDataSourceUserName(dataSourceUserName);
+            }else if (arg.startsWith("datasource.password=")) {
+                String dataSourcePassword = arg.split("=")[1];
+                argumentParser.setDataSourcePassword(dataSourcePassword);
+            }else if (arg.startsWith("saveToFile=")) {
                 String saveToFile = arg.split("=")[1];
                 argumentParser.setSaveToFile(saveToFile);
             } else {

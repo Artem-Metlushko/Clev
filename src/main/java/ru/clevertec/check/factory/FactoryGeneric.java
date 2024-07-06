@@ -2,6 +2,7 @@ package ru.clevertec.check.factory;
 
 import ru.clevertec.check.entity.DiscountCard;
 import ru.clevertec.check.entity.Product;
+import ru.clevertec.check.util.ConnectionManager;
 import ru.clevertec.check.util.DiscountCardReaderCsv;
 import ru.clevertec.check.util.ProductReaderCsv;
 import ru.clevertec.check.validator.Validator;
@@ -16,6 +17,7 @@ public final class FactoryGeneric {
     private static DiscountCardReaderCsv discountCardReaderCsv;
     private static ProductReaderCsv productReaderCsv;
     private static Validator validator;
+    private static ConnectionManager connectionManager;
 
     private FactoryGeneric() {
         throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
@@ -60,5 +62,6 @@ public final class FactoryGeneric {
         return validator;
 
     }
+
 
 }

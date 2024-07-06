@@ -77,42 +77,7 @@ public class CheckService {
         return check;
     }
 
-    /*    private Check getSumTotalCost(Check check) {
-            Map<Long, Integer> productQuantities = check.getProductQuantities();
-            double totalCost = 0.0;
-            for (Map.Entry<Long, Integer> entry : productQuantities.entrySet()) {
-                Product product = productService.getProductById(entry.getKey()).orElseThrow();
-                totalCost += product.getPrice() * entry.getValue();
-            }
-            check.setTotalCost(totalCost);
-    //        return totalCost;
-            return getTotalCostAfterApplyDiscount(check);
-        }
 
-
-        private Check getTotalCostAfterApplyDiscount(Check check) {
-            double totalCost = check.getTotalCost();
-            Long discountCardNumber = check.getDiscountCardNumber();
-
-            if (discountCardNumber != null) {
-                DiscountCard discountCard = discountCardService.getDiscountCard(discountCardNumber);
-                if (discountCard != null) {
-                    double discount = totalCost * discountCard.getDiscountAmount() / 100.0;
-                    System.out.println("Discount applied: " + discount);
-                    double v = totalCost - discount;
-                    check.setTotalCost(v);
-                    return check;
-
-                } else {
-                    System.out.println("Warning: Discount card not found.");
-                }
-            }
-    //        return totalCost;
-            return check;
-
-        }
-
-    */
     public Check getCheck(Check check) {
         double totalCost = 0.0;
         Map<Long, Integer> productQuantities = check.getProductQuantities();
