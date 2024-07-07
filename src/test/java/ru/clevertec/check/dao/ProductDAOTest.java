@@ -4,7 +4,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ru.clevertec.check.dto.ArgumentParserDto;
 import ru.clevertec.check.entity.Product;
 import ru.clevertec.check.factory.FactoryDao;
 import ru.clevertec.check.util.ConnectionManager;
@@ -37,12 +36,12 @@ class ProductDAOTest {
 
     @BeforeAll
     static void setUpAll() {
-        ArgumentParserDto argumentParserDto = ArgumentParserDto.builder()
-                .dataSourceUrl("jdbc:postgresql://localhost:54321/productstestdb")
-                .dataSourcePassword("testpassword")
-                .dataSourceUserName("testuser")
-                .build();
-        ConnectionManager.init(argumentParserDto);
+//        ArgumentParserDto argumentParserDto = ArgumentParserDto.builder()
+//                .dataSourceUrl("jdbc:postgresql://localhost:54321/productstestdb")
+//                .dataSourcePassword("testpassword")
+//                .dataSourceUserName("testuser")
+//                .build();
+////        ConnectionManager.init(argumentParserDto);
 
         try (Connection connection = ConnectionManager.get();
              Statement statement = connection.createStatement()
