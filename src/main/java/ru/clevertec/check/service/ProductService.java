@@ -23,18 +23,18 @@ public class ProductService implements Service {
     }
 
 
-    public void addProduct(Product product) {
-        productDAO.addProduct(product);
+    public Product addProduct(Product product) {
+        return productDAO.addProduct(product);
     }
 
 
-    public void updateProduct(Product product) {
-        productDAO.updateProduct(product);
+    public boolean updateProduct(Product product) {
+        return productDAO.updateProduct(product);
     }
 
 
-    public void deleteProduct(long id) {
-        productDAO.deleteProduct(id);
+    public boolean deleteProduct(long id) {
+        return productDAO.deleteProduct(id);
     }
 }
 

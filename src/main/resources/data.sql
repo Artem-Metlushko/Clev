@@ -6,10 +6,10 @@ CREATE TABLE IF NOT EXISTS "product"
     description VARCHAR(50),
     price DECIMAL,
     quantity_in_stock INTEGER,
-    wholesale_produ BOOLEAN
+    wholesale_product BOOLEAN
 );
 
-INSERT INTO product (id, description, price, quantity_in_stock, wholesale_produ) VALUES
+INSERT INTO product (id, description, price, quantity_in_stock, wholesale_product) VALUES
 (1, 'Milk', 1.07, 10, true),
 (2, 'Cream 400g', 2.71, 20, true),
 (3, 'Yogurt 400g', 2.10, 7, true),

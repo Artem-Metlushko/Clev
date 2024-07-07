@@ -11,7 +11,6 @@ public class CheckRunnerR {
     public static void main(String[] args) {
 
         ArgumentParserDto argumentParserDto = ArgumentParserService.parseArguments(args);
-        System.out.println(argumentParserDto.getDataSourceUrl());
         ConnectionManager.init(argumentParserDto);
         DatabaseInitializerUtil.runSqlScripts();
 

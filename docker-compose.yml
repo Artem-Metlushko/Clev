@@ -9,3 +9,14 @@ services:
       POSTGRES_PASSWORD: "qwerty"
     ports:
       - "5432:5432"
+
+  testdb:
+    image: "postgres"
+    container_name: "productstestdb"
+    restart: always
+    environment:
+      POSTGRES_DB: "productstestdb"
+      POSTGRES_USER: "testuser"
+      POSTGRES_PASSWORD: "testpassword"
+    ports:
+      - "54321:5432"

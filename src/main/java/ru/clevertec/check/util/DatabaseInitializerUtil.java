@@ -26,7 +26,7 @@ public final class DatabaseInitializerUtil {
     }
 
     private static String readScript() {
-        Path scriptPath = Paths.get("src/main/resources/initialization.sql");
+        Path scriptPath = Paths.get("src/main/resources/data.sql");
         try {
             byte[] scriptBytes = Files.readAllBytes(scriptPath);
             return new String(scriptBytes, StandardCharsets.UTF_8);

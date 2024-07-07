@@ -22,7 +22,7 @@ public final class FactoryDao {
 
     public static synchronized ProductDAO getProductDAO() {
         if (productDAO == null) {
-            productDAO = new ProductDAO(FactoryGeneric.getProductHashMap());
+            productDAO = new ProductDAO();
         }
         return productDAO;
     }
