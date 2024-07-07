@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS "product"
     quantity_in_stock INTEGER,
     wholesale_produ BOOLEAN
 );
+
 INSERT INTO product (id, description, price, quantity_in_stock, wholesale_produ) VALUES
 (1, 'Milk', 1.07, 10, true),
 (2, 'Cream 400g', 2.71, 20, true),
@@ -29,3 +30,16 @@ INSERT INTO product (id, description, price, quantity_in_stock, wholesale_produ)
 (18, 'Paulaner 0.5l', 1.10, 100, false),
 (19, 'Whiskey Jim Beam 1l', 13.99, 30, false),
 (20, 'Whiskey Jack Daniels 1l', 17.19, 20, false);
+
+CREATE TABLE IF NOT EXISTS "discount_card"
+(
+    id BIGSERIAL PRIMARY KEY,
+    number BIGINT,
+    discount_amount INTEGER
+);
+
+INSERT INTO discount_card (id, number, discount_amount) VALUES
+(1, 1111, 3),
+(2, 2222, 3),
+(3, 3333, 4),
+(4, 4444, 5);
