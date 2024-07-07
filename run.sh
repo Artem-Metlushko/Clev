@@ -1,5 +1,7 @@
 docker container stop products
 docker container rm products
+docker container stop productstestdb
+docker container rm productstestdb
 docker-compose up -d
 ./gradlew clean
 ./gradlew build

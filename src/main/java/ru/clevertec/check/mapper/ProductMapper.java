@@ -13,7 +13,7 @@ public class ProductMapper {
         String description = rs.getString("description");
         Double price = rs.getDouble("price");
         int quantity = rs.getInt("quantity_in_stock");
-        boolean wholesale = rs.getBoolean("wholesale_produ");
+        boolean wholesale = rs.getBoolean("wholesale_product");
         return Product.builder()
                 .id(id)
                 .description(description)

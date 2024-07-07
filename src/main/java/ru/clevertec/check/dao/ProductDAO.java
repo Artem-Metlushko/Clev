@@ -20,7 +20,7 @@ public class ProductDAO implements Dao {
     private static final String SELECT_PRODUCT_BY_ID = "SELECT id, description, price, quantity_in_stock, wholesale_product FROM product WHERE id = ?";
     private static final String SELECT_ALL_PRODUCTS = "SELECT * FROM product";
     private static final String DELETE_PRODUCT_SQL = "DELETE FROM product WHERE id = ?";
-    private static final String UPDATE_PRODUCT_SQL = "UPDATE product SET description = ?, price = ?, quantity_in_stock = ?, wholesale_produ = ? WHERE id = ?";
+    private static final String UPDATE_PRODUCT_SQL = "UPDATE product SET description = ?, price = ?, quantity_in_stock = ?, wholesale_product = ? WHERE id = ?";
 
     public Product addProduct(Product product) {
         Product savedProduct = null;
